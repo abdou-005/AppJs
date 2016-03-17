@@ -1,0 +1,10 @@
+<h3>Creation Item</h3>
+
+{{items}}
+
+<form>
+    name : <input type="text" name="name" ng-model="item.name">
+    category : <select ng-model="item.cat_id" ng-options="cat.id as cat.name for cat in cats"></select>
+
+    <button ng-click="createItem(item)">OK</button>
+</form>
