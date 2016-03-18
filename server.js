@@ -38,6 +38,25 @@ require('./routing/callback');
 require('./routing/users');
 require('./routing/domaines');
 
+/*
+console.log('creation');
+var use = {
+    username:'abdou@hotmail.com',
+    firstname :'abddd'
+};
+var spec = {
+    name : 'spc1',
+    desc : 'description'
+}
+
+var user = new models.Use(use);
+var specialite = new models.Specialite(spec);
+
+user.specialites.push(specialite);
+
+console.log(user);
+console.log('-----------------');
+*/
 
 app.listen(PORT,function(){
     console.log('server listen on PORT = ',PORT);
