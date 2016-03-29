@@ -17,10 +17,6 @@ app
 		refrech();
 
 		$scope.createUser = function(){
-
-			/*catProvider.createCat($scope.c,function(data){
-				console.log('data =',data);
-			});  */
 			if($scope.user == '' || !$scope.user.username || !$scope.user.password){
 				console.log('user null or email  password null');
 				return false;
