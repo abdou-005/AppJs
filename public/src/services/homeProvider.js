@@ -13,6 +13,7 @@ app
 
 		this.createUser = function(u,cb){
 			homeRepository.createUser(u,function(data){
+				console.log(data);
 				return cb(data);
 			});
 
@@ -20,17 +21,20 @@ app
 
 		this.removeUser = function(id,cb){
 			homeRepository.removeUser(id,function(data){
+				console.log(data);
 				return cb(data);
 			});
 		};
 
 		this.editUser = function(id,cb){
 			homeRepository.editUser(id,function(data){
+				console.log(data);
 				return cb(data);
 			});
 		};
 		this.updateUser = function(u,cb){
 			homeRepository.updateUser(u,function(data){
+				console.log(data);
 				return cb(data);
 			});
 		};

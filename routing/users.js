@@ -3,8 +3,10 @@
  */
 
 var users = require('../controllers/users');
+
 app.get('/users',users.index);
 app.get('/users/:id',users.one);
+app.get('/user/:email',users.oneEmail);
 app.post('/users',users.create);
 app.put('/users',users.update);
 app.delete('/users/:id',users.delete);

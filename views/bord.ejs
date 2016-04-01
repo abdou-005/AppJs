@@ -15,8 +15,6 @@
 
     <!-- switchery -->
     <link rel="stylesheet" href="ressources/css/switchery/switchery.min.css" />
-    <!--propre Style-->
-    <link rel="stylesheet" href="ressources/style.css" />
 
     <script src="ressources/js/jquery.min.js"></script>
     <!--[if lt IE 9]>
@@ -32,17 +30,13 @@
     <!-- Vendors -->
     <script type="text/javascript" src="src/vendors/angular/angular.js"></script>
     <script type="text/javascript" src="src/vendors/angular-route/angular-route.js"></script>
-
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="routing.js"></script>
-
     <!-- Controllers-->
     <script type="text/javascript" src="src/controllers/contentController.js"></script>
     <script type="text/javascript" src="src/controllers/itemController.js"></script>
     <script type="text/javascript" src="src/controllers/contactController.js"></script>
     <script type="text/javascript" src="src/controllers/homeController.js"></script>
-
-
     <!-- Directives-->
     <script type="text/javascript" src="src/directives/itemDecoratorDirective.js"></script>
 
@@ -64,14 +58,19 @@
     <div class="main_container">
 
         <% include nav %>
-
         <!-- page content -->
         <div class="right_col" role="main">
             <h1>--APP--</h1>
             <a href="#/">Home</a> {{x}} -- <span ng-bind="x"></span>
 
+            <p>
+                <strong>user</strong> : <%= user%> <br/>
+                <strong>id</strong> : <%= user._id%> <br/>
+                <strong>email</strong> : <%= user.username%> <br/>
+                <strong>password</strong> : <%= user.password%> <br/>
+            </p>
             <nav>
-                <a href="/signup"> Login </a><a href="#/users"> Users </a> <a href="#/contents"> Contenus </a> || <a href="#/items"> Items </a>
+                <a href="login.html"> Login </a><a href="#/users"> Users </a> <a href="#/contents"> Contenus </a> || <a href="#/items"> Items </a>
             </nav>
 
             <div class="">
@@ -96,6 +95,7 @@
                     <div ng-view>
 
                     </div>
+                    <% if(user.typeUser == 'admin'){%>
                     <div ng-controller="homeCtrl">
                         <div class="col-md-12 col-xs-12">
                             <div class="x_panel">
@@ -125,7 +125,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Nom <span class="required">*</span></label>
                                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Nom" ng-model="user.firstname" >
+                                                <input type="text" class="form-control" placeholder="Nom" ng-model="user.firstname" value="autre">
                                             </div>
 
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Prenom <span class="required">*</span></label>
@@ -136,7 +136,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">E-mail <span class="required">*</span></label>
                                             <div class="col-md-4 col-sm-4 col-xs-12">
-                                                <input type="email"  class="form-control" placeholder="E-mail" ng-model="user.username" required="true">
+                                                <input type="email"  class="form-control" placeholder="E-mail" ng-model="user.email" required="true">
 
                                             </div>
                                             <label class="control-label col-md-2 col-sm-2 col-xs-12">Password <span class="required">*</span></label>
@@ -279,7 +279,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
@@ -308,8 +307,10 @@
                                             <form class="form-inline">
                                                 <div class="form-group">
                                                     <label for="ex3">Show</label>
-                                                    <select class="form-control input-sm">
-                                                        <option value="10" selected>10</option>
+                                                    <select class="form-control input-sm" ng-model="entries">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="10">10</option>
                                                         <option value="25">25</option>
                                                         <option value="50">50</option>
                                                         <option value="100">100</option>
@@ -322,7 +323,7 @@
                                             <form class="form-inline">
                                                 <div class="form-group pull-right">
                                                     <label for="ex3">Search all columns:</label>
-                                                    <input type="text" id="ex3" class="form-contro input-sml" placeholder=" ">
+                                                    <input type="text" id="ex3" class="form-contro input-sml" placeholder="" ng-model="searchTxt">
                                                 </div>
                                             </form>
                                         </div>
@@ -349,7 +350,7 @@
 
                                             <tbody>
 
-                                            <tr  ng-repeat="u in users" >
+                                            <tr ng-repeat="u in users | filter:searchTxt | limitTo:entries" >
                                                 <td class="a-center ">
                                                     <a href="" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                                                 </td>
@@ -357,13 +358,13 @@
                                                     {{u.firstname}} {{u.lastname}}
                                                 </td>
                                                 <td class=" " ><span ng-repeat="v in u.typeUser">{{v}}</span></td>
-                                                <td class=" ">{{u.username}} || {{u.password}}</td>
+                                                <td class=" ">{{u.email}} || {{u.password}}</td>
                                                 <td class=" ">{{u.dateDebut  | date : format : timezone}}</td>
                                                 <td class=" " ><span ng-repeat="v in u.statut">{{v}}</span></td>
                                                 <td class="a-right a-right ">{{u.confirmer}}</td>
                                                 <td class=" last"><a href="#">
-                                                    <a href="" class="btn btn-warning btn-xs" ng-click="editUser(u._id)"><i class="fa fa-pencil" ></i> Edit </a>
-                                                    <a href="" class="btn btn-danger btn-xs" ng-click="removeUser(u._id)"><i class="fa fa-trash-o" ></i> Delete </a></a>
+                                                        <a href="" class="btn btn-warning btn-xs" ng-click="editUser(u._id)"><i class="fa fa-pencil" ></i> Edit </a>
+                                                        <a href="" class="btn btn-danger btn-xs" ng-click="removeUser(u._id)"><i class="fa fa-trash-o" ></i> Delete </a></a>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -390,6 +391,7 @@
                             </div>
                         </div>
                     </div>
+                    <%}%>
                 </div>
             </div>
             <% include footer %>

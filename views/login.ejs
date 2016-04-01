@@ -50,6 +50,12 @@
     <div class="">
         <a class="hiddenanchor" id="toregister"></a>
         <a class="hiddenanchor" id="tologin"></a>
+        <% if(message.length > 0){%>
+        <div class="alert alert-danger">
+            <%= message %>
+        </div>
+        <%}%>
+
         <div id="wrapper">
             <div id="login" class="animate form">
                 <section class="login_content">
