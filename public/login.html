@@ -41,34 +41,34 @@
     <script type="text/javascript" src="routing.js"></script>
 
     <!-- Controllers-->
-    <script type="text/javascript" src="src/controllers/contactController.js"></script>
+    <script type="text/javascript" src="src/controllers/loginController.js"></script>
 
 
 </head>
 
 <body style="background:#F7F7F7;" ng-app="myApp">
-    <div class="">
+    <div class="" ng-controller="loginCtrl">
+        <div>{{token}}</div>
         <a class="hiddenanchor" id="toregister"></a>
         <a class="hiddenanchor" id="tologin"></a>
-        <% if(message.length > 0){%>
-        <div class="alert alert-danger">
-            <%= message %>
-        </div>
-        <%}%>
-
         <div id="wrapper">
+            {{user}}
+            <hr>
+            {{message}}
             <div id="login" class="animate form">
                 <section class="login_content">
-                    <form  action="/login" method="post">
+                    <form>
                         <h1>Login Form</h1>
                         <div>
-                            <input type="email" class="form-control" placeholder="Email" name="email" required="" />
+                            <input type="email" class="form-control" placeholder="Email" name="email" ng-model="user.email" required="" />
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password" name="password" required="" />
+                            <input type="password" class="form-control" placeholder="Password" name="password" ng-model="user.password" required="" />
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-default btn-lg">Log in</button>
+                            <button type="submit" class="btn btn-default btn-sm" ng-click="getToken(token)">getToken</button>
+                            <button type="submit" class="btn btn-default btn-sm" ng-click="loginUser()">Log in</button>
+                            <button type="submit" class="btn btn-info btn-sm" ng-click="deselect()">cancel</button>
                             <a class="reset_pass" href="#">Lost your password?</a>
                         </div>
                         <div class="clearfix"></div>
@@ -92,20 +92,21 @@
             </div>
             <div id="register" class="animate form">
                 <section class="login_content">
-                    <form action="/signup" method="post">
+                    <form >
                         <h1>Create Account</h1>
 
                         <div>
-                            <input type="email" class="form-control" placeholder="Email"  name="email" />
+                            <input type="email" class="form-control" placeholder="Email"  name="email"  ng-model="user.email" />
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password"  name="password" />
+                            <input type="password" class="form-control" placeholder="Password"  name="password"  ng-model="user.password" />
                         </div>
                         <div>
-                            <input type="text" class="form-control" placeholder="Name"  name="firstname"  />
+                            <input type="text" class="form-control" placeholder="Name"  name="firstname" ng-model="user.firstname" />
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-default btn-lg">Signup</button>
+                            <button type="submit" class="btn btn-default btn-sm" ng-click="registerUser()">Signup</button>
+                            <button type="submit" class="btn btn-info btn-sm" ng-click="deselect()">cancel</button>
                         </div>
                         <div class="clearfix"></div>
                         <div class="separator">

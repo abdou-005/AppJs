@@ -4,7 +4,7 @@
 'use strict';
 
 app.config(
-    function($routeProvider){
+    function($routeProvider,$locationProvider){
         $routeProvider
             .when('/users',{
                 controller:'homeCtrl',
@@ -22,6 +22,7 @@ app.config(
                 controller : 'contactList',
                 //templateUrl : 'views/contact/list.html'
             })
-            .otherwise({redirectTo:'/'})
+            .otherwise({redirectTo:'/'});
+        $locationProvider.html5Mode({enabled : true, requireBase:false});
     }
 );

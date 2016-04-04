@@ -1,6 +1,4 @@
-/**
- * Created by abdo on 2016-03-08.
- */
+
 var prestations = require('./prestations');
 var adresses = require('./adresses');
 var specialites = require('./specialites');
