@@ -86,12 +86,15 @@ apiRoutes.route('/token')
 		res.json({ message: 'Welcome to the coolest API on earth!' });
 	});
 // route to return all users (GET http://localhost:8080/api/users)
+var users = require('../controllers/users');
 apiRoutes.route('/users')
+	.get(users.index);
+/*apiRoutes.route('/users')
 		.get(function(req, res) {
 			models.User.find({}, function(err, users) {
 				res.json(users);
 			});
-		});
+		});*/
 
 
 module.exports = apiRoutes;

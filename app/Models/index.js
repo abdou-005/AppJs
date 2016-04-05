@@ -14,7 +14,7 @@ var devis = require('../Schema/devis');
 exports.Devis = mongoose.model('Devis',devis.schema);
 
 var avis = require('../Schema/avis');
-exports.Avi = mongoose.model('Avi',avis.schema);
+exports.Avis = mongoose.model('Avis',avis.schema);
 
 var users = require('../Schema/users');
 exports.User = mongoose.model('User',users.schema);

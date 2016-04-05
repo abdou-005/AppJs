@@ -14,7 +14,7 @@ exports.index = function (req, res) {
 		.then(logLib.logContent)
 		.then(returnResponse)
 	;*/
-	models.User.find({}).sort({name : -1}).select('-code').execAsync()
+	models.User.find({}).execAsync()
 		//.then(logLib.logContent)
 		.then(returnResponse)
 	;

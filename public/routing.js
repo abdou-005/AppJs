@@ -4,7 +4,7 @@
 'use strict';
 
 app.config(
-    function($routeProvider,$locationProvider){
+    function($routeProvider){
         $routeProvider
             .when('/users',{
                 controller:'homeCtrl',
@@ -15,14 +15,22 @@ app.config(
                 templateUrl:'views/content/list.html'
             })
             .when('/items',{
-                controller:'itemList',
+                controller:'itemListCtrl',
                 templateUrl:'views/item/list.html'
             })
+            .when('/items/create',{
+                controller:'itemCreateCtrl',
+                templateUrl:'views/item/create.html'
+            })
             .when('/login',{
-                controller : 'contactList',
+                //controller : 'contactList',
                 //templateUrl : 'views/contact/list.html'
             })
+            .when('/demandeDevis',{
+                controller : 'demandeDevisCtrl',
+                templateUrl : 'views/devi/create.html'
+            })
             .otherwise({redirectTo:'/'});
-        $locationProvider.html5Mode({enabled : true, requireBase:false});
+        //$locationProvider.html5Mode({enabled : true, requireBase:false });
     }
 );

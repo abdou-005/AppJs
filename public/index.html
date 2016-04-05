@@ -30,26 +30,32 @@
     <!-- Vendors -->
     <script type="text/javascript" src="src/vendors/angular/angular.js"></script>
     <script type="text/javascript" src="src/vendors/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="libs/angular-socket-io/socket.js"></script>
+
+
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="routing.js"></script>
     <!-- Controllers-->
     <script type="text/javascript" src="src/controllers/contentController.js"></script>
     <script type="text/javascript" src="src/controllers/itemController.js"></script>
-    <script type="text/javascript" src="src/controllers/contactController.js"></script>
     <script type="text/javascript" src="src/controllers/homeController.js"></script>
+    <script type="text/javascript" src="src/controllers/navController.js"></script>
+    <script type="text/javascript" src="src/controllers/demandeDevisController.js"></script>
     <!-- Directives-->
     <script type="text/javascript" src="src/directives/itemDecoratorDirective.js"></script>
 
     <!-- Services-->
-    <script type="text/javascript" src="src/services/itemProvider.js"></script>
     <script type="text/javascript" src="src/services/contentProvider.js"></script>
-    <script type="text/javascript" src="src/services/contactProvider.js"></script>
     <script type="text/javascript" src="src/services/homeProvider.js"></script>
+    <script type="text/javascript" src="src/services/socketDevisFactory.js"></script>
     <!-- Repositorys-->
     <script type="text/javascript" src="src/repositorys/contentRepository.js"></script>
-    <script type="text/javascript" src="src/repositorys/itemRepository.js"></script>
-    <script type="text/javascript" src="src/repositorys/contactRepository.js"></script>
     <script type="text/javascript" src="src/repositorys/homeRepository.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:8080');
+    </script>
 
 </head>
 <body class="nav-md" ng-app="myApp" ng-init="x= 'Hello';">
@@ -61,7 +67,7 @@
             <div class="left_col scroll-view">
 
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+                    <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -72,7 +78,7 @@
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
-                        <h2> User/h2>
+                        <h2> User</h2>
                     </div>
                 </div>
                 <!-- /menu prile quick info -->
@@ -80,76 +86,76 @@
                 <br />
 
                 <!-- sidebar menu -->
-                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" ng-controller="navController">
 
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="#">Dashboard</a>
+                                    <li ng-class="{active : isActive('index.html')}"><a href="index.html">Dashboard</a>
                                     </li>
-                                    <li><a href="bord.html">Dashboard2</a>
+                                    <li><a href="#">Dashboard2</a>
                                     </li>
-                                    <li><a href="index3.html">Dashboard3</a>
+                                    <li><a href="#">Dashboard3</a>
                                     </li>
                                 </ul>
                             </li>
 
                             <li><a><i class="fa fa-edit"></i> Contenus <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="/contents">Domaine</a>
+                                    <li ng-class="{active : isActive('#/contents')}"><a href="#/contents">Domaine</a>
                                     </li>
-                                    <li><a href="/items">Specialites</a>
+                                    <li ng-class="{active : isActive('#/items')}"><a href="#/items">Specialites</a>
                                     </li>
-                                    <li class="active" ><a href="form_validation.html">Evaluations</a>
+                                    <li ng-class="{active : isActive('#/items/create')}" ><a href="#/items/create">Create Spesc</a>
                                     </li>
-                                    <li><a href="form_wizards.html">Devis</a>
+                                    <li ng-class="{active : isActive('#/items/create')}" ><a href="#/demandeDevis">Demande Devis</a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-desktop"></i> Utilisateurs <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="/users">Gerer</a>
+                                    <li ng-class="{active : isActive('#/users')}" ><a href="#/users">Gerer</a>
                                     </li>
-                                    <li><a href="media_gallery.html">Media Gallery</a>
+                                    <li><a href="#">Media Gallery</a>
                                     </li>
-                                    <li><a href="typography.html">Typography</a>
+                                    <li><a href="#">Typography</a>
                                     </li>
-                                    <li><a href="icons.html">Icons</a>
+                                    <li><a href="#">Icons</a>
                                     </li>
-                                    <li><a href="glyphicons.html">Glyphicons</a>
+                                    <li><a href="#">Glyphicons</a>
                                     </li>
-                                    <li><a href="widgets.html">Widgets</a>
+                                    <li><a href="#">Widgets</a>
                                     </li>
-                                    <li><a href="invoice.html">Invoice</a>
+                                    <li><a href="#">Invoice</a>
                                     </li>
-                                    <li><a href="inbox.html">Inbox</a>
+                                    <li><a href="#">Inbox</a>
                                     </li>
-                                    <li><a href="calender.html">Calender</a>
+                                    <li><a href="#">Calender</a>
                                     </li>
                                 </ul>
                             </li>
 
                             <li><a><i class="fa fa-table"></i> Page Pro <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="tables.html">Tables</a>
+                                    <li><a href="#">Tables</a>
                                     </li>
-                                    <li><a href="tables_dynamic.html">Table Dynamic</a>
+                                    <li><a href="#">Table Dynamic</a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-bar-chart-o"></i> Projet <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="chartjs.html">Chart JS</a>
+                                    <li><a href="#">Chart JS</a>
                                     </li>
-                                    <li><a href="chartjs2.html">Chart JS2</a>
+                                    <li><a href="#">Chart JS2</a>
                                     </li>
-                                    <li><a href="morisjs.html">Moris JS</a>
+                                    <li><a href="#">Moris JS</a>
                                     </li>
-                                    <li><a href="echarts.html">ECharts </a>
+                                    <li><a href="#">ECharts </a>
                                     </li>
-                                    <li><a href="other_charts.html">Other Charts </a>
+                                    <li><a href="#">Other Charts </a>
                                     </li>
                                 </ul>
                             </li>
@@ -160,29 +166,29 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="e_commerce.html">E-commerce</a>
+                                    <li><a href="#">E-commerce</a>
                                     </li>
-                                    <li><a href="projects.html">Projects</a>
+                                    <li><a href="#">Projects</a>
                                     </li>
-                                    <li><a href="project_detail.html">Project Detail</a>
+                                    <li><a href="#">Project Detail</a>
                                     </li>
-                                    <li><a href="contacts.html">Contacts</a>
+                                    <li><a href="#">Contacts</a>
                                     </li>
-                                    <li><a href="profile.html">Profile</a>
+                                    <li><a href="#">Profile</a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="page_404.html">404 Error</a>
+                                    <li><a href="#">404 Error</a>
                                     </li>
-                                    <li><a href="page_500.html">500 Error</a>
+                                    <li><a href="#">500 Error</a>
                                     </li>
-                                    <li><a href="plain_page.html">Plain Page</a>
+                                    <li><a href="#">Plain Page</a>
                                     </li>
-                                    <li><a href="login.html">Login Page</a>
+                                    <li><a href="#">Login Page</a>
                                     </li>
-                                    <li><a href="pricing_tables.html">Pricing Tables</a>
+                                    <li><a href="#">Pricing Tables</a>
                                     </li>
 
                                 </ul>

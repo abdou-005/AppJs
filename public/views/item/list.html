@@ -1,42 +1,48 @@
-<h3>List Items</h3>
-{{item}}
+<h3>List Domaine</h3>
 <div>
-
     <table class="table">
         <thead>
             <tr>
-                <th>Object ID</th>
-                <th>Cat_id</th>
-                <th>name</th>
+                <th>domaine</th>
+                <th>spec</th>
                 <th>action</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody><!-- content._id as content.name-->
-        <tr>
-            <td><input class="form-control" ></td>
-            <td>
-                <select ng-model="item.cat" ng-options=" cat._id as cat.name for cat in cats"></select>
-            </td>
-            <td><input class="form-control" ng-model="item.name"></td>
-            <td><button class="btn btn-primary" ng-click="createItem()">Add Item</button></td>
-            <th><button class="btn btn-info" ng-click="updateItem()">Update</button> &nbsp; &nbsp;
-                <button class="btn btn-info" ng-click="deselectItem()">Clear</button>
-            </th>
-        </tr>
-            <tr ng-repeat="item in items">
-                <td>{{item._id}}</td>
-                <td>{{item.cat_id}}</td>
-                <td>{{item.name}}</td>
-                <td><button class="btn btn-warning" ng-click="editItem(item._id)">Edit</button></td>
-                <td><button class="btn btn-danger" ng-click="removeItem(item._id)">Remove</button> &nbsp; &nbsp;
+            <tr ng-repeat="d in domaines">
+                <td>{{d.name}}</td>
+                <td><span ng-repeat="s in d.specialites">{{s.name}} <a href="#/items/create">Add</a></span></td>
+                <td><button class="btn btn-warning" >Edit</button></td>
+                <td><button class="btn btn-danger" >Remove</button> &nbsp; &nbsp;
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 <hr/>
-<h3>List Cats</h3>
-{{cats}}
-
+<h3>List Users</h3>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>email</th>
+            <th>type</th>
+            <th>password</th>
+            <th>action</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody><!-- content._id as content.name-->
+        <tr ng-repeat="u in users">
+            <td>{{u.email}}</td>
+            <td>{{u.typeUser}}</td>
+            <td>{{u.password}}</td>
+            <td><button class="btn btn-warning" >Edit</button></td>
+            <td><button class="btn btn-danger" >Remove</button> &nbsp; &nbsp;
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 

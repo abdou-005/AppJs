@@ -12,23 +12,34 @@ mongoose = Promise.promisifyAll(require('mongoose')); //add bluebird to  Mongo s
 logLib = require('./lib/log');
 app = express();
 
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+
 //== configuration ===========================================
+var port = process.env.PORT || 8080; // set our port
 config = require('./config/main');// config files
-var port     = process.env.PORT || 8080; // set our port
 mongoose.connect(config.url);// connect to our mongoDB database
+
+// Initialize Passport
+require('./config/passport')(passport);
+
 app.set('superSecret', config.secret); // secret variable
+
 //== Initialize models =======================================
 models = require('./app/Models');
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-/*app.use(session({
-	secret: 'PFE secret'
-	//cookie: { expires : new Date(Date.now() + 60000) }
-
-}));*/
+app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 
 // get all data/stuff of the body (POST) parameters
+app.use(logger('dev'));
+/*app.use(session({
+ secret: 'PFE secret'
+ //cookie: { expires : new Date(Date.now() + 60000) }
+
+ }));*/
 app.use(cookieParser());
 app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
@@ -38,8 +49,6 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Initialize Passport
-require('./config/passport')(passport);
 // =======================
 // routes ================
 // =======================
@@ -70,15 +79,35 @@ require('./app/routes/domaines');
 require('./app/routes/offres');
 require('./app/routes/avis');
 require('./app/routes/demanderDevis');
-// API ROUTES -------------------
+// require var ROUTES -------------------
 var authenticatejwt = require('./app/routes/authenticationjwt');
+
 // apply the routes to our application with the prefix
 app.use('/api', authenticatejwt);
 
+/// test Schema
+/*
+var devi = new models.Devi({
+	title : 'title1',
+	state : 'waiting'
+});
+console.log(devi);
+*/
+// =======================
+// socket ======
+// =======================
+
+io.on('connection', function (socket) {
+	console.log('user has connected');
+	socket.on('disconnect',function(){
+		console.log('user has disconnected');
+	});
+});
 // =======================
 // start the server ======
 // =======================
-
-app.listen(port,function(){
+server.listen(8080,function(){
 	console.log('server listen on PORT = ',port);
 });
+
+

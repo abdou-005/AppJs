@@ -1,10 +1,10 @@
-<h3>Creation Item</h3>
-
-{{items}}
+<h3>Liste specialites</h3>
+<a href="#/items"> <strong><----</strong> </a>
+<span ng-repeat="d in domaines"> {{d.specialites.name}} pour <strong>{{d.name}} || </strong></span>
 
 <form>
-    name : <input type="text" name="name" ng-model="item.name">
-    category : <select ng-model="item.cat_id" ng-options="cat.id as cat.name for cat in cats"></select>
+    Spec : <input type="text" name="name" ng-model="spec.name">
+    Domaine : <select ng-model="d._id" ng-options="d._id as d.name for d in domaines"></select>
 
-    <button ng-click="createItem(item)">OK</button>
+    <td><button class="btn btn-warning" >Edit</button></td>
 </form>

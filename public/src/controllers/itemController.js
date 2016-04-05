@@ -5,49 +5,30 @@
 
 
 app
-    .controller('itemList',function($scope,catProvider,itemProvider){
+    .controller('itemListCtrl',function($scope,homeProvider,contentProvider){
 
 
         var refrech = function(){
-            catProvider.getCats(function(data){
-              $scope.cats = data;
+            homeProvider.getUsers(function(data){
+              $scope.users = data;
             });
-            itemProvider.getItems(function(data){
-                $scope.items = data;
-                $scope.item = '';
+            contentProvider.getDomaines(function(data){
+                $scope.domaines = data;
+
             });
         };
         refrech();
 
-        $scope.createItem = function(){
-            itemProvider.createItem($scope.item,function(data){
-            });
-            refrech();
+    })
+    .controller('itemCreateCtrl',function($scope,contentProvider){
 
-        };
+    var refrech = function(){
+        contentProvider.getDomaines(function(data){
+            $scope.domaines = data;
 
-        $scope.removeItem = function(id){
-            itemProvider.removeItem(id,function(data){
-            });
-            refrech();
-        };
-
-        $scope.editItem = function(id){
-            itemProvider.editItem(id,function(data){
-                $scope.item = data;
-            });
-        };
-
-        $scope.updateItem = function(){
-            itemProvider.updateItem($scope.item._id,$scope.item,function(data){
-            });
-            refrech();
-        };
-
-        $scope.deselectItem = function(){
-            $scope.item = '';
-        };
-
+        });
+    };
+    refrech();
 
     });
 
