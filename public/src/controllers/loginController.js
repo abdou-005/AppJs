@@ -1,5 +1,4 @@
 'use strict';
-
 app
 	.controller('loginCtrl',function($scope,$http){
 
@@ -14,7 +13,7 @@ app
 		};
 		$scope.registerUser = function(){
 
-			$http.post('/register',$scope.user).success(function(resp){
+			$http.post('/users',$scope.user).success(function(resp){
 					console.log(resp);
 					$scope.message = resp;
 				});

@@ -23,12 +23,11 @@ app.config(
                 templateUrl:'views/item/create.html'
             })
             .when('/login',{
-                //controller : 'contactList',
-                //templateUrl : 'views/contact/list.html'
+                redirectTo:'login.html'
             })
             .when('/demandeDevis',{
                 controller : 'demandeDevisCtrl',
-                templateUrl : 'views/devi/create.html'
+                templateUrl : 'views/devis/create.html'
             })
             .otherwise({redirectTo:'/'});
         //$locationProvider.html5Mode({enabled : true, requireBase:false });

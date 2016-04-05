@@ -46,14 +46,12 @@ exports.create = function(req,res){
 		res.json(obj);
 	};
 	var returnError = function(){
-		res.status(500).json({message : 'Problem'});
+		res.json({ success: false, message: 'Problem : password required or email exist' });
 	};
-	console.log('----------------------------------');
-	console.log(req.body);
+	/*var email = req.body.email.toLowerCase();
+	req.body.email = email;*/
 	var user = new models.User(req.body);
-	console.log('----------------------------------');
-	console.log(user);
-	console.log('----------------------------------');
+	console.log(req.body);
 	models.User(user).saveAsync()
 		.catch(logLib.throwError)
 		.then(logLib.logContent)

@@ -14,8 +14,8 @@ exports.schema = new mongoose.Schema({
 		lastname:{type : String, maxlength:50},
 		etat: Boolean,
 		code :{type:String},
-		email :{type:String},
-		password :{type:String},
+		email :{type:String, unique:true, lowercase: true},
+		password :{type:String, required:true},
 		telMobil : {type:String, maxlength:10},
 		telDomi : {type:String, maxlength:10},
 		dateCreation : {type: Date, default: Date.now},
@@ -38,4 +38,4 @@ exports.schema = new mongoose.Schema({
 		avis : [avis.schema],
 		missions : [missions.schema]
 	}
-)
+);
