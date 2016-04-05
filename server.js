@@ -69,6 +69,7 @@ require('./app/routes/users');
 require('./app/routes/domaines');
 require('./app/routes/offres');
 require('./app/routes/avis');
+require('./app/routes/demanderDevis');
 // API ROUTES -------------------
 var authenticatejwt = require('./app/routes/authenticationjwt');
 // apply the routes to our application with the prefix
