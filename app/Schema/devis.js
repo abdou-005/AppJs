@@ -13,7 +13,6 @@ exports.schema = new mongoose.Schema({
 		durationWork : String,
 		state : ['waiting', 'confirm'],
 		type : ['emergency','normal'],
-
 		offres : [offres.schema],
 		mission : missions.schema
 	}

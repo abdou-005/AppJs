@@ -11,7 +11,7 @@ var offres = require('../Schema/offres');
 exports.Offre = mongoose.model('Offre',offres.schema);
 
 var devis = require('../Schema/devis');
-exports.Devi = mongoose.model('Devi',devis.schema);
+exports.Devis = mongoose.model('Devis',devis.schema);
 
 var avis = require('../Schema/avis');
 exports.Avi = mongoose.model('Avi',avis.schema);
