@@ -91,6 +91,13 @@ io.on('connection', function (socket) {
 	socket.on('disconnect',function(){
 		console.log('user has disconnected');
 	});
+	var i=0;
+	setInterval(function(){
+		socket.emit('message',{
+			message : i
+		});
+		i++;
+	},1000);
 });
 // =======================
 // start the server ======

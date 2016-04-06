@@ -27,12 +27,15 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Vendors -->
+    <!--
+     <script src="/socket.io/socket.io.js"></script>
+     -->
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <!-- Angular core components -->
     <script type="text/javascript" src="src/vendors/angular/angular.js"></script>
     <script type="text/javascript" src="src/vendors/angular-route/angular-route.js"></script>
     <script type="text/javascript" src="libs/angular-socket-io/socket.js"></script>
-
-
+    <!-- Initialize Angular App  -->
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="routing.js"></script>
     <!-- Controllers-->
@@ -53,11 +56,6 @@
     <script type="text/javascript" src="src/repositorys/contentRepository.js"></script>
     <script type="text/javascript" src="src/repositorys/homeRepository.js"></script>
     <script type="text/javascript" src="src/repositorys/devisRepository.js"></script>
-    
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io.connect('http://localhost:8080');
-    </script>
 
 </head>
 <body class="nav-md" ng-app="myApp" ng-init="x= 'Hello';">

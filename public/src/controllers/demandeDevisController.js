@@ -1,7 +1,13 @@
 
 'use strict';
 app
-	.controller('demandeDevisCtrl',function($scope ,devisProvider){
+	.controller('demandeDevisCtrl',function($scope ,devisProvider,socketDevisFactory){
+
+        $scope.messages = [];
+
+        socketDevisFactory.on('message',function(data){
+           $scope.messages.push(data.message);
+        });
 
 		var refrechTous = function(){
             devisProvider.getDevis(function(data){
@@ -37,19 +43,6 @@ app
             console.log($scope.offres);
         };
 
-        /*$scope.createSpecialite = function(){
-            if($scope.specialites)
-            {
-                $scope.specialites.push($scope.specialite);
-            }else{
-                var specialites = [];
-                $scope.specialites = specialites;
-                $scope.specialites.push($scope.specialite);
-            }
-            $scope.specialite= '';
-            console.log($scope.specialites);
-        };*/
-
         $scope.removeOffre = function(t){
             console.log(t);
             for(var offre in $scope.offres){
@@ -58,16 +51,6 @@ app
                 }
             }
         };
-
-        /*$scope.removeSpecialite = function(s){
-            console.log(s);
-            for(var spc in $scope.specialites){
-                if($scope.specialites[spc] == s){
-                    $scope.specialites.splice(spc,1);
-                }
-            }
-        };
-*/
         $scope.createDevis = function(){
             console.log($scope.devis);
             console.log($scope.offres);
@@ -100,24 +83,6 @@ app
 
         };
 
-        /*$scope.removeSpecialiteDom = function(s,d){
-            contentProvider.editDomaine(d._id,function(data){
-                console.log('data = ',data);
-                for(var spec in data.specialites ){
-                    //console.log(data.tags[tag]._id);
-                    if(data.specialites[spec]._id == s._id){
-                        data.specialites.splice(spec,1);
-                    }
-                }
-                contentProvider.updateDomaine(data,function(data){
-                    console.log('data = ',data);
-                    $scope.domaine = data;
-                });
-                refrech();
-            });
-
-        };*/
-
         $scope.removeDevis = function(id){
             devisProvider.removeDevis(id,function(data){
                 console.log('data = ',data);
@@ -142,12 +107,6 @@ app
                 }
                 $scope.offres = '';
             }
-            /*if($scope.specialites){
-                for(var s in $scope.specialites){
-                    $scope.domaine.specialites.push($scope.specialites[s]);
-                }
-                $scope.specialites = '';
-            }*/
             devisProvider.updateDevis($scope.devis,function(data){
                 console.log('data = ',data);
                 $scope.devis = data;

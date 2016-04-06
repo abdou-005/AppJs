@@ -22,6 +22,7 @@ app
     })
     .controller('itemCreateCtrl',function($scope,contentProvider){
 
+        var socket = io.connect('http://localhost:8080');
     var refrech = function(){
         contentProvider.getDomaines(function(data){
             $scope.domaines = data;
