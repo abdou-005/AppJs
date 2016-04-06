@@ -4,9 +4,9 @@ var jwt =  require('jsonwebtoken');
 var users = require('../controllers/users');
 
 // get an instance of the router for api routes
-var apiRoutes = express.Router();
+var authRoutes = express.Router();
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
-apiRoutes.route('/authenticate')
+authRoutes.route('/authenticate')
 	.post(function(req, res) {
 		// find the user
 		var email = req.body.email.toLowerCase();
@@ -45,7 +45,7 @@ apiRoutes.route('/authenticate')
 	});
 
 // route middleware to verify a token
-apiRoutes.use(function(req, res, next) {
+authRoutes.use(function(req, res, next) {
 			// check header or url parameters or post parameters for token
 			var token = req.body.token || req.query.token || req.headers['x-access-token'];
 			// decode token
@@ -75,26 +75,21 @@ apiRoutes.use(function(req, res, next) {
 			}
 });
 // route to show a random message (GET http://localhost:8080/api/)
-apiRoutes.route('/')
+authRoutes.route('/')
 		.get(function(req, res) {
 			console.log('Welcome to the coolest API on earth!');
 			res.json({ message: 'Welcome to the coolest API on earth!' });
 
 		});
 // route to show a random message (GET http://localhost:8080/api/)
-apiRoutes.route('/token')
+authRoutes.route('/token')
 	.get(function(req, res) {
 		console.log(req.query.token);
 		res.json({ message: 'Welcome to the coolest API on earth!' });
 	});
 // route to return all users (GET http://localhost:8080/api/users)
-apiRoutes.route('/users')
+authRoutes.route('/users')
 	.get(users.index);
-/*apiRoutes.route('/users')
-		.get(function(req, res) {
-			models.User.find({}, function(err, users) {
-				res.json(users);
-			});
-		});*/
 
-module.exports = apiRoutes;
+
+module.exports = authRoutes;

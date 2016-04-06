@@ -53,40 +53,26 @@ app.use(passport.session());
 // routes ================
 // =======================
 
-// basic route
-/*
-app.post('/register', function(req, res) {
-	console.log(req.body);
-	// create a sample user
-	var newUser = new models.User({
-		email: 'foulen@hotmail.com',
-		password: '123',
-		typeUser: 'admin'
-	});
-	console.log(newUser);
-	res.json({body : req.body, newUser : newUser});
-	// save the sample user
-	/newUser.save(function(err) {
-		if (err) throw err;
+// basic route------------------------
 
-		console.log('User saved successfully');
-		res.json({ success: true });
-	});
-});*/
-//== routes ==================================================
 //require('./app/routes/autentificationspassport')(passport);
 require('./app/routes/users');
 require('./app/routes/domaines');
 require('./app/routes/offres');
 require('./app/routes/avis');
 require('./app/routes/demanderDevis');
+
 // require var ROUTES -------------------
 var authenticatejwt = require('./app/routes/authenticationjwt');
+var demandeDevis = require('./app/routes/demanderDevis');
 
 // apply the routes to our application with the prefix
-app.use('/api', authenticatejwt);
+app.use('/devis',demandeDevis);
+app.use('/auth', authenticatejwt);
+
 
 /// test Schema
+
 /*
 var devi = new models.Devi({
 	title : 'title1',
@@ -94,6 +80,7 @@ var devi = new models.Devi({
 });
 console.log(devi);
 */
+
 // =======================
 // socket ======
 // =======================

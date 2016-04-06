@@ -48,8 +48,6 @@ exports.create = function(req,res){
 	var returnError = function(){
 		res.json({ success: false, message: 'Problem : password required or email exist' });
 	};
-	/*var email = req.body.email.toLowerCase();
-	req.body.email = email;*/
 	var user = new models.User(req.body);
 	console.log(req.body);
 	models.User(user).saveAsync()
@@ -86,5 +84,4 @@ exports.delete = function(req,res){
 		.catch(logLib.throwError)
 		.done(returnResponse,returnError)
 	;
-
 };
