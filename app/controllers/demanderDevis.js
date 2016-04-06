@@ -26,9 +26,7 @@ exports.create = function(req,res){
 	var returnError = function(){
 		res.status(500).json({message : 'Problem'});
 	};
-	
-	var devis = new models.Devis(req.body);	
-	
+	var devis = new models.Devis(req.body);
 	models.Devis(devis).saveAsync()
 		.catch(logLib.throwError)
 		.then(logLib.logContent)
@@ -42,9 +40,12 @@ exports.update = function(req,res){
 		res.json(obj);
 	};
 	var options = {_id: req.body._id};
+<<<<<<< HEAD
 
 	var offre = new models.Offre(req.body);
 
+=======
+>>>>>>> 288bd3790ed911ea885d3030ab51316e1f8ef91b
 	var returnUpdateObject = function(){
 		models.Devis.findOneAsync(options)
 			.then(logLib.logContent)

@@ -1,6 +1,7 @@
 
 var express = require('express');
 var jwt =  require('jsonwebtoken');
+var users = require('../controllers/users');
 
 // get an instance of the router for api routes
 var apiRoutes = express.Router();
@@ -8,7 +9,8 @@ var apiRoutes = express.Router();
 apiRoutes.route('/authenticate')
 	.post(function(req, res) {
 		// find the user
-		console.log(req.body);
+		var email = req.body.email.toLowerCase();
+		req.body.email = email;
 		models.User.findOne({
 			email: req.body.email
 		}, function(err, user) {
@@ -86,7 +88,6 @@ apiRoutes.route('/token')
 		res.json({ message: 'Welcome to the coolest API on earth!' });
 	});
 // route to return all users (GET http://localhost:8080/api/users)
-var users = require('../controllers/users');
 apiRoutes.route('/users')
 	.get(users.index);
 /*apiRoutes.route('/users')
@@ -95,6 +96,5 @@ apiRoutes.route('/users')
 				res.json(users);
 			});
 		});*/
-
 
 module.exports = apiRoutes;

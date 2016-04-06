@@ -23,8 +23,7 @@ app.config(
                 templateUrl:'views/item/create.html'
             })
             .when('/login',{
-                //controller : 'contactList',
-                //templateUrl : 'views/contact/list.html'
+                redirectTo:'login.html'
             })
             .when('/demandeDevis',{
                 controller : 'demandeDevisCtrl',

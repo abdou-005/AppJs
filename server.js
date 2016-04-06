@@ -54,6 +54,7 @@ app.use(passport.session());
 // =======================
 
 // basic route
+/*
 app.post('/register', function(req, res) {
 	console.log(req.body);
 	// create a sample user
@@ -65,13 +66,13 @@ app.post('/register', function(req, res) {
 	console.log(newUser);
 	res.json({body : req.body, newUser : newUser});
 	// save the sample user
-	/*newUser.save(function(err) {
+	/newUser.save(function(err) {
 		if (err) throw err;
 
 		console.log('User saved successfully');
 		res.json({ success: true });
-	});*/
-});
+	});
+});*/
 //== routes ==================================================
 //require('./app/routes/autentificationspassport')(passport);
 require('./app/routes/users');
