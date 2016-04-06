@@ -28,7 +28,7 @@ app.config(
             })
             .when('/demandeDevis',{
                 controller : 'demandeDevisCtrl',
-                templateUrl : 'views/devi/create.html'
+                templateUrl : 'views/devis/create.html'
             })
             .otherwise({redirectTo:'/'});
         //$locationProvider.html5Mode({enabled : true, requireBase:false });

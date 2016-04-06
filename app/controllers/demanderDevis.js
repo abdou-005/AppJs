@@ -35,13 +35,16 @@ exports.create = function(req,res){
 		.done(returnResponse,returnError)
 	;
 };
+
+
 exports.update = function(req,res){
 	var returnResponse = function(obj){
 		res.json(obj);
 	};
 	var options = {_id: req.body._id};
 
-	
+	var offre = new models.Offre(req.body);
+
 	var returnUpdateObject = function(){
 		models.Devis.findOneAsync(options)
 			.then(logLib.logContent)

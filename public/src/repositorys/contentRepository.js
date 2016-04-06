@@ -5,7 +5,7 @@
 
 app.service('contentRepository',function($http){
 
-    this.getDomaines = function(cb){
+    this.getDomaines= function(cb){
         $http.get('/domaines').success(function(resp){
                 console.log('i got the data I request');
                      /*for(var c in resp){

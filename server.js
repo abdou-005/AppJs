@@ -76,9 +76,9 @@ app.post('/register', function(req, res) {
 //require('./app/routes/autentificationspassport')(passport);
 require('./app/routes/users');
 require('./app/routes/domaines');
-require('./app/routes/offres');
 require('./app/routes/avis');
 require('./app/routes/demanderDevis');
+require('./app/routes/offres');
 // require var ROUTES -------------------
 var authenticatejwt = require('./app/routes/authenticationjwt');
 
