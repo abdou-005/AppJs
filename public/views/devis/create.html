@@ -21,21 +21,20 @@
         </div>
         <div class="x_content">
             <form class="form-horizontal form-label-left" name="formContent">
-                {{devi}}
                 <div class="col-md-6 col-xs-12">
                     <br/>
                     <div class="col-md-6">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <input type="text" class="form-control" placeholder="titre" ng-model="devi.title" >
+                                    <input type="text" class="form-control" placeholder="titre" ng-model="devis.title" >
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <textarea class="form-control" rows="3" placeholder="Description" ng-model="devi.contents"></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="Description" ng-model="devis.desc"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -45,27 +44,27 @@
                             <div class="form-group">
                                 <div class="input-group">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" ng-click="createTag()">+</button>
+                                            <button type="button" class="btn btn-primary" ng-click="createOffre()">+</button>
                                         </span>
-                                    <input type="text" class="form-control" placeholder="Tags" ng-model="tag.name">
+                                    <input type="text" class="form-control" placeholder="offre" ng-model="offre.title">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12" ng-show="tags">
-                            <a ng-repeat="t in tags" href="" class="btn btn-danger btn-xs" ng-click="removeTag(t)">
-                                <i class="fa fa-trash-o" ></i> {{t.name}}
+                        <div class="col-md-12" ng-show="offres">
+                            <a ng-repeat="offre in offres" href="" class="btn btn-danger btn-xs" ng-click="removeOffre(offre)">
+                                <i class="fa fa-trash-o" ></i> {{offre.title}}
                             </a>
 
                         </div>
-                        <div class="col-md-12" ng-show="domaine.tags">
+                        <div class="col-md-12" ng-show="devis.offres">
                             <hr/>
-                            <a ng-repeat="t in domaine.tags" href="" class="btn btn-danger btn-xs" ng-click="removeTagDom(t,domaine)">
-                                <i class="fa fa-trash-o" ></i> {{t.name}}
+                            <a ng-repeat="offre in devis.offres" href="" class="btn btn-danger btn-xs" ng-click="removeOffreDevis(offre, devis)">
+                                <i class="fa fa-trash-o" ></i> {{offre.title}}
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-xs-12">
+                <!-- <div class="col-md-6 col-xs-12">
                     <br/>
                     <div class="col-md-12">
                         <div class="form-group">
@@ -78,7 +77,7 @@
                         </div>
                     </div>
                     <div class="col-md-12" ng-show="specialites">
-
+                
                         <a ng-repeat="s in specialites" href="" class="btn btn-danger btn-xs" ng-click="removeSpecialite(s)">
                             <i class="fa fa-trash-o" ></i> {{s.name}}
                         </a>
@@ -90,14 +89,14 @@
                         </a>
                     </div>
                 </div>
-
+                 -->
                 <div class="clearfix"></div>
                 <div class="ln_solid"></div>
                 <div class="form-group">
                     <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                         <button  class="btn btn-primary btn-sm" ng-click="deselect()">Cancel</button>
-                        <button  class="btn btn-success btn-sm" ng-click="createDomaine()">Create</button>
-                        <button class="btn btn-info btn-sm" ng-click="updateDomaine()"> Update</button>
+                        <button  class="btn btn-success btn-sm" ng-click="createDevis()">Create</button>
+                        <button class="btn btn-info btn-sm" ng-click="updateDevis()"> Update</button>
                     </div>
                 </div>
             </form>
@@ -127,7 +126,7 @@
 
             </div>
             <div style="padding: 10px;"></div>
-            <!--
+            <!--devis-->
             <div class="col-md-12 col-xs-12">
                 <table  class="table table-striped responsive-utilities jambo_table">
                     <thead>
@@ -137,26 +136,26 @@
                         </th>
                         <th>Nom </th>
                         <th>Description </th>
-                        <th>Tags </th>
-                        <th>Specialite</th>
+                        <th>state </th>
+                        <th>type</th>
+                        <th>offre</th>
                         <th class=" no-link last"><span class="nobr">Action</span>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr  ng-repeat="d in domaines" >
+                    <tr ng-repeat="d in devis" >
                         <td class="a-center ">
                             <a href="" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                         </td>
-                        <td class=" ">
-                            {{d.name}}
-                        </td>
+                        <td class=" ">{{d.title}}</td>
                         <td class=" " >{{d.desc}}</td>
-                        <td class=" ">{{d.tags}}</td>
-                        <td class=" ">{{d.specialites}}</td>
+                        <td class=" ">{{d.state}}</td>
+                        <td class=" ">{{d.type}}</td>
+                        <td class=" ">{{d.offres}}</td>
                         <td class=" last"><a href="#">
-                            <a href="" class="btn btn-warning btn-xs" ng-click="editDomaine(d._id)"><i class="fa fa-pencil" ></i> Edit </a>
-                            <a href="" class="btn btn-danger btn-xs" ng-click="removeDomaine(d._id)"><i class="fa fa-trash-o" ></i> Delete </a></a>
+                            <a href="" class="btn btn-warning btn-xs" ng-click="editDevis(d._id)"><i class="fa fa-pencil" ></i> Edit </a>
+                            <a href="" class="btn btn-danger btn-xs" ng-click="removeDevis(d._id)"><i class="fa fa-trash-o" ></i> Delete </a></a>
                         </td>
                     </tr>
                     </tbody>
@@ -177,7 +176,7 @@
                     </div>
                 </div>
             </div>
-            -->
+            
         </div>
     </div>
 </div>

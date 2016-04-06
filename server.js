@@ -58,10 +58,13 @@ app.use(passport.session());
 //require('./app/routes/autentificationspassport')(passport);
 require('./app/routes/users');
 require('./app/routes/domaines');
-require('./app/routes/offres');
 require('./app/routes/avis');
 require('./app/routes/demanderDevis');
+<<<<<<< HEAD
 
+=======
+require('./app/routes/offres');
+>>>>>>> 5cfec3696feac96a9a12b50f17cf54bb97a24c0e
 // require var ROUTES -------------------
 var authenticatejwt = require('./app/routes/authenticationjwt');
 var demandeDevis = require('./app/routes/demanderDevis');

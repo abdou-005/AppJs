@@ -33,11 +33,19 @@ exports.create = function(req,res){
 		.done(returnResponse,returnError)
 	;
 };
+
+
 exports.update = function(req,res){
 	var returnResponse = function(obj){
 		res.json(obj);
 	};
 	var options = {_id: req.body._id};
+<<<<<<< HEAD
+
+	var offre = new models.Offre(req.body);
+
+=======
+>>>>>>> 288bd3790ed911ea885d3030ab51316e1f8ef91b
 	var returnUpdateObject = function(){
 		models.Devis.findOneAsync(options)
 			.then(logLib.logContent)
